@@ -101,13 +101,16 @@ existing one. Compiled MMCV is required; `mmcv-lite` does not supply its kernels
 
 ```bash
 python3.11 -m venv "$R2S/.runtime/bmp/venv"
-"$PMPOSE_PYTHON" -m pip install --upgrade pip setuptools wheel ninja
+# mmcv==2.2.0's --no-build-isolation build still imports pkg_resources.
+# Keep setuptools below 81 so that module remains available.
+"$PMPOSE_PYTHON" -m pip install --upgrade pip 'setuptools>=69,<81' wheel ninja
 "$PMPOSE_PYTHON" -m pip install torch==2.7.1 torchvision==0.22.1 \
   --index-url https://download.pytorch.org/whl/cu128
 "$PMPOSE_PYTHON" -m pip install mmengine==0.10.7 numpy==1.26.4 opencv-python==4.10.0.84
 export CUDA_HOME=/usr/local/cuda-12.8
 export CC=/usr/bin/gcc-12 CXX=/usr/bin/g++-12
-MAX_JOBS=6 FORCE_CUDA=1 MMCV_WITH_OPS=1 TORCH_CUDA_ARCH_LIST=12.0 \
+# Use your GPU's arch (12.0 Blackwell; 8.9 Ada; 8.6 Ampere A6000).
+MAX_JOBS=6 FORCE_CUDA=1 MMCV_WITH_OPS=1 TORCH_CUDA_ARCH_LIST="${TORCH_CUDA_ARCH_LIST:-12.0}" \
   "$PMPOSE_PYTHON" -m pip install --no-build-isolation --no-binary=mmcv mmcv==2.2.0
 "$PMPOSE_PYTHON" -m pip install mmdet==3.3.0 mmpretrain==1.2.0 \
   xtcocotools pycocotools hydra-core einops mat4py importlib_metadata \

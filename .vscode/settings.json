@@ -1,0 +1,10 @@
+{
+  "terminal.integrated.env.linux": {
+    "OPENAI_BASE_URL": "https://openrouter.ai/api/v1",
+    "CURSOR_OPENAI_BASE_URL": "https://openrouter.ai/api/v1/cursor",
+    "OPENAI_MODEL": "qwen/qwen3-8b",
+    "AHA3D_AGENT_MODEL": "qwen/qwen3-8b",
+    "AHA3D_AGENT_FALLBACK_MODEL": "moonshotai/kimi-k3",
+    "AHA3D_AGENT_PROVIDER": "openrouter"
+  }
+}

@@ -1,0 +1,12 @@
+---
+description: Drive aha-3d with Qwen3-8B (or Kimi K3), not GPT-6 Astra or Opus
+alwaysApply: true
+---
+
+# Agent model for aha-3d
+
+Use **Qwen3-8B** (`qwen/qwen3-8b` via OpenRouter) as the coding agent for this checkout. If Qwen is unavailable, use **Kimi K3** (`moonshotai/kimi-k3`). Do not use GPT-6 Astra or Opus.
+
+Local endpoint settings live in the gitignored `.env` and `agent_model.local.sh` (`source ./agent_model.local.sh`). For the Cursor model picker: Settings → Models → OpenAI API Key = OpenRouter key → Override Base URL `https://openrouter.ai/api/v1/cursor` → Add custom model `qwen/qwen3-8b` (and optionally `moonshotai/kimi-k3`). Kimi K3 is also available as a built-in Cursor model (enable if hidden).
+
+The geometry stack (Pi3X, SAM3, Kimodo/Llama text encoder) is separate and is not replaced by this agent model.
